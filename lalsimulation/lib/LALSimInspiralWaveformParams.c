@@ -191,6 +191,7 @@ DEFINE_INSERT_FUNC(PhenomXHMRingdownAmpFitsVersion, INT4, "RDAmpFitsVersion", 12
 DEFINE_INSERT_FUNC(PhenomXHMPhaseRef21, REAL8, "PhaseRef21", 0.)
 DEFINE_INSERT_FUNC(PhenomXHMThresholdMband, REAL8, "ThresholdMband", 0.001)
 DEFINE_INSERT_FUNC(PhenomXHMAmpInterpolMB, INT4, "AmpInterpol", 1)
+DEFINE_INSERT_FUNC(PhenomXHMLambdaG, REAL8, "lambdaG", pow(10,15))
 
 /* IMRPhenomXPHM Parameters */
 DEFINE_INSERT_FUNC(PhenomXPHMMBandVersion, INT4, "MBandPrecVersion", 0)
@@ -202,7 +203,7 @@ DEFINE_INSERT_FUNC(PhenomXPHMTwistPhenomHM, INT4, "TwistPhenomHM", 0)
 
 /* IMRPhenomZPHM Parameters */
 
-DEFINE_INSERT_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15))
+/* DEFINE_INSERT_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15)) */
 
 /* IMRPhenomTHM Parameters */
 DEFINE_INSERT_FUNC(PhenomTHMInspiralVersion, INT4, "InspiralVersion", 0)
@@ -360,6 +361,7 @@ DEFINE_LOOKUP_FUNC(PhenomXHMRingdownAmpFitsVersion, INT4, "RDAmpFitsVersion", 12
 DEFINE_LOOKUP_FUNC(PhenomXHMPhaseRef21, REAL8, "PhaseRef21", 0.)
 DEFINE_LOOKUP_FUNC(PhenomXHMThresholdMband, REAL8, "ThresholdMband", 0.001)
 DEFINE_LOOKUP_FUNC(PhenomXHMAmpInterpolMB, INT4, "AmpInterpol", 1)
+DEFINE_LOOKUP_FUNC(PhenomXHMLambdaG, REAL8, "lambdaG", pow(10,15))
 
 /* IMRPhenomXPHM */
 DEFINE_LOOKUP_FUNC(PhenomXPHMMBandVersion, INT4, "MBandPrecVersion", 0)
@@ -371,7 +373,7 @@ DEFINE_LOOKUP_FUNC(PhenomXPHMTwistPhenomHM, INT4, "TwistPhenomHM", 0)
 
 /* IMRPhenomZPHM Parameters */
 
-DEFINE_LOOKUP_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15))
+/* DEFINE_LOOKUP_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15)) */
 
 /* IMRPhenomTHM Parameters */
 DEFINE_LOOKUP_FUNC(PhenomTHMInspiralVersion, INT4, "InspiralVersion", 0)
@@ -503,6 +505,7 @@ DEFINE_ISDEFAULT_FUNC(PhenomXHMRingdownAmpFitsVersion, INT4, "RDAmpFitsVersion",
 DEFINE_ISDEFAULT_FUNC(PhenomXHMPhaseRef21, REAL8, "PhaseRef21", 0.)
 DEFINE_ISDEFAULT_FUNC(PhenomXHMThresholdMband, REAL8, "ThresholdMband", 0.001)
 DEFINE_ISDEFAULT_FUNC(PhenomXHMAmpInterpolMB, INT4, "AmpInterpol", 1)
+DEFINE_ISDEFAULT_FUNC(PhenomXHMLambdaG, REAL8, "lambdaG", pow(10,15))
 
 /* IMRPhenomXPHM */
 DEFINE_ISDEFAULT_FUNC(PhenomXPHMMBandVersion, INT4, "MBandPrecVersion", 0)
@@ -514,7 +517,7 @@ DEFINE_ISDEFAULT_FUNC(PhenomXPHMTwistPhenomHM, INT4, "TwistPhenomHM", 0)
 
 /* IMRPhenomZPHM Parameters */
 
-DEFINE_ISDEFAULT_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15))
+/* DEFINE_ISDEFAULT_FUNC(PhenomZPHMLambdaG, REAL8, "lambdaG", pow(10,15)) */
 
 /* IMRPhenomTHM Parameters */
 DEFINE_ISDEFAULT_FUNC(PhenomTHMInspiralVersion, INT4, "InspiralVersion", 0)

@@ -313,7 +313,7 @@ double lambdaG = pow(10,15);
    if (lalParams==NULL){
       lalParams=XLALCreateDict();
    }
-   XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(lalParams, pow(10,15));
+   XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(lalParams, pow(10,15));
 
    /* If the 22 is required, call to PhenomX. */
    if(ell == 2 && abs(emm) == 2){
@@ -890,7 +890,7 @@ int XLALSimIMRPhenomXHMModes(
     }
 
     LALparams = XLALCreateDict();
-    XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(LALparams, pow(10,15));
+    XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(LALparams, pow(10,15));
 
     /* Create new LAL dictionary with the default mode-array of PhenomXHM.
        Can not pass LALparams to this function because the mode array must be null,
@@ -972,10 +972,10 @@ int XLALSimIMRPhenomXHMModes(
 
      //to add lambdaG to lalparams dictionary
       if (XLALDictContains(LALparams, "lambdaG")){
-        lambdaG = XLALSimInspiralWaveformParamsLookupPhenomZPHMLambdaG(LALparams);
+        lambdaG = XLALSimInspiralWaveformParamsLookupPhenomXHMLambdaG(LALparams);
       }
       else {
-        lambdaG = XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(LALparams, pow(10,15));
+        lambdaG = XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(LALparams, pow(10,15));
       }
 
      // to add redshift to lalparams dictionary
@@ -1131,7 +1131,7 @@ int XLALSimIMRPhenomXHM(
   XLAL_CHECK(check_input_mode_array(lalParams) == XLAL_SUCCESS, XLAL_EFAULT, "Not available mode chosen.\n");
 
   lalParams=XLALCreateDict();
-  XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(lalParams, pow(10,15));
+  XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(lalParams, pow(10,15));
 
   /* Evaluate the model */
   retcode = IMRPhenomXHM_MultiMode(
@@ -1444,11 +1444,11 @@ static int IMRPhenomXHM_MultiMode(
   if (lalParams == NULL)
   {
       lalParams_aux = XLALCreateDict();
-      XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(lalParams_aux, pow(10,15));
+      XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(lalParams_aux, pow(10,15));
   }
   else{
       lalParams_aux = XLALDictDuplicate(lalParams);
-      XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(lalParams_aux, pow(10,15));
+      XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(lalParams_aux, pow(10,15));
   }
   lalParams_aux = IMRPhenomXHM_setup_mode_array(lalParams_aux);
   LALValue *ModeArray = XLALSimInspiralWaveformParamsLookupModeArray(lalParams_aux);

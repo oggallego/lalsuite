@@ -1002,7 +1002,7 @@ struct params parseargs(int argc, char **argv)
         case 'H':      /* lambdaG */
             if (p.params == NULL)
                 p.params = XLALCreateDict();
-            XLALSimInspiralWaveformParamsInsertPhenomZPHMLambdaG(p.params, atoi(LALoptarg));
+            XLALSimInspiralWaveformParamsInsertPhenomXHMLambdaG(p.params, atoi(LALoptarg));
             break;
         case 'f':      /* f-min */
             p.f_min = atof(LALoptarg);

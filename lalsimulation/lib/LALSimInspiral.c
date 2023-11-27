@@ -183,8 +183,8 @@ static const char *lalSimulationApproximantNames[] = {
     INITIALIZE_NAME(IMRPhenomXAS),
     INITIALIZE_NAME(IMRPhenomXHM),
 	INITIALIZE_NAME(IMRPhenomXP),
-    INITIALIZE_NAME(IMRPhenomXPHM),
-    INITIALIZE_NAME(IMRPhenomZPHM),
+    INITIALIZE_NAME(IMRPhenomXPHM), /*Add new waveform*/
+    /* INITIALIZE_NAME(IMRPhenomZPHM), */
 		INITIALIZE_NAME(TEOBResumS),
     INITIALIZE_NAME(IMRPhenomT),
     INITIALIZE_NAME(IMRPhenomTHM),
@@ -305,8 +305,8 @@ static double fixReferenceFrequency(const double f_ref, const double f_min, cons
         case IMRPhenomPv2_NRTidalv2:
 			return f_min;
 		case IMRPhenomXP:
-		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+		case IMRPhenomXPHM:/*Add new waveform*/
+      /*  case IMRPhenomZPHM: */
         case NRSur4d2s:
         case IMRPhenomT:
         case IMRPhenomTHM:
@@ -385,6 +385,10 @@ int XLALSimInspiralChooseTDWaveform(
     REAL8 quadparam2 = 1.+XLALSimInspiralWaveformParamsLookupdQuadMon2(LALparams);
     REAL8 lambda1 = XLALSimInspiralWaveformParamsLookupTidalLambda1(LALparams);
     REAL8 lambda2 = XLALSimInspiralWaveformParamsLookupTidalLambda2(LALparams);
+
+     /*Add lambdaG:*/
+    /*REAL8 lambdaG = XLALSimInspiralWaveformParamsLookUpPhenomZPHMLambdaG(LALparams);*/
+
     int amplitudeO = XLALSimInspiralWaveformParamsLookupPNAmplitudeOrder(LALparams);
     int phaseO =XLALSimInspiralWaveformParamsLookupPNPhaseOrder(LALparams);
 		/* Tidal parameters to be computed, if required, by universal relations */
@@ -1163,10 +1167,11 @@ int XLALSimInspiralChooseTDWaveform(
 			break;
 
 		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+
+     /*   case IMRPhenomZPHM:
 			polariz = 0;
 			ret = XLALSimInspiralTDFromFD(hplus, hcross, m1, m2, S1x, S1y, S1z, S2x, S2y, S2z, distance, inclination, phiRef, longAscNodes, eccentricity, meanPerAno, deltaT, f_min, f_ref, LALparams, approximant);
-			break;
+			break; */
 
         case IMRPhenomT:
             /* Waveform-specific sanity checks */
@@ -1284,6 +1289,9 @@ int XLALSimInspiralChooseFDWaveform(
     REAL8 quadparam2 = 1.+XLALSimInspiralWaveformParamsLookupdQuadMon2(LALparams);
     REAL8 lambda1 = XLALSimInspiralWaveformParamsLookupTidalLambda1(LALparams);
     REAL8 lambda2 = XLALSimInspiralWaveformParamsLookupTidalLambda2(LALparams);
+
+    /*Add lambdaG:*/
+    /*REAL8 lambdaG = XLALSimInspiralWaveformParamsZPHMLambdaG(LALparams);*/
 
     /* Support variables for precessing wfs*/
     REAL8 spin1x,spin1y,spin1z;
@@ -2284,9 +2292,8 @@ int XLALSimInspiralChooseFDWaveform(
 			}
 
 			break;
-
-		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+            
+        case IMRPhenomXPHM:
 			/* Waveform-specific sanity checks */
 			if( !XLALSimInspiralWaveformParamsFrameAxisIsDefault(LALparams) )
 			{
@@ -3527,6 +3534,9 @@ SphHarmFrequencySeries *XLALSimInspiralChooseFDModes(
 	REAL8 lambda1 = XLALSimInspiralWaveformParamsLookupTidalLambda1(LALparams);
 	REAL8 lambda2 = XLALSimInspiralWaveformParamsLookupTidalLambda2(LALparams);
 
+     /*Add lambdaG:*/
+    /*REAL8 lambdaG = XLALSimInspiralWaveformParamsZPHMLambdaG(LALparams);*/
+
 	/* General sanity checks that will abort
 	 *
 	 * If non-GR approximants are added, include them in
@@ -3604,13 +3614,12 @@ SphHarmFrequencySeries *XLALSimInspiralChooseFDModes(
 			XLALSimIMRPhenomXHMModes(&hlms, m1, m2, S1z, S2z, deltaF, f_min, f_max, f_ref, phiRef, distance, LALparams);
 			break;
 
-		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+        case IMRPhenomXPHM:
 			/* Waveform-specific sanity checks */
 			if( !XLALSimInspiralWaveformParamsFlagsAreDefault(LALparams) )
 					XLAL_ERROR_NULL(XLAL_EINVAL, "Non-default flags given, but this approximant does not support this case.");
 			if( !checkTidesZero(lambda1, lambda2) )
-					XLAL_ERROR_NULL(XLAL_EINVAL, "Non-zero tidal parameters were given, but this is approximant doe not have tidal corrections.");
+					XLAL_ERROR_NULL(XLAL_EINVAL, "Non-zero tidal parameters were given, but this is approximant doe not have tidal corrections."); 
 
 			/* Compute individual modes in the J-frame from IMRPhenomXPHM */
 		  XLALSimIMRPhenomXPHMModes(&hlms, m1, m2, S1x, S1y, S1z,	S2x, S2y, S2z, deltaF, f_min, f_max, f_ref, phiRef, distance, inclination, LALparams);
@@ -4688,14 +4697,14 @@ int XLALSimInspiralPolarizationsFromChooseFDModes(
         break;
         
         case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+     /*   case IMRPhenomZPHM:
         phiRef_modes = phiRef;
         REAL8 d1=0, d2=0, d3=0, d4=0, d5=0;
         ret = XLALSimIMRPhenomXPCalculateModelParametersFromSourceFrame(&d1, &d2, &d3, &theta, &d4, &d5, &zeta_polarization, m1, m2, f_ref, phiRef, inclination, S1x,S1y,S1z, S2x,S2y,S2z, LALparams);
         XLAL_CHECK(XLAL_SUCCESS == ret, XLAL_EFUNC, "Error: XLALSimIMRPhenomXPCalculateModelParametersFromSourceFrame failed.\n");
         azimuthal = 0.;
 
-        break;
+        break; */
         case SEOBNRv4HM_ROM:
 
         break;
@@ -6288,8 +6297,8 @@ int XLALSimInspiralImplementedTDApproximants(
 		case IMRPhenomXAS:
 		case IMRPhenomXHM:
 		case IMRPhenomXP:
-		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+		case IMRPhenomXPHM: 
+    /*    case IMRPhenomZPHM: */
         case PhenSpinTaylorRD:
         case SEOBNRv1:
         case SpinDominatedWf:
@@ -6353,7 +6362,7 @@ int XLALSimInspiralImplementedFDApproximants(
 	    case IMRPhenomXHM:
 		case IMRPhenomXP:
 		case IMRPhenomXPHM:
-        case IMRPhenomZPHM:
+    /*    case IMRPhenomZPHM: */
         case EOBNRv2_ROM:
         case EOBNRv2HM_ROM:
         case SEOBNRv1_ROM_EffectiveSpin:
@@ -6773,7 +6782,7 @@ int XLALSimInspiralGetSpinSupportFromApproximant(Approximant approx){
     case IMRPhenomPv3HM:
 	case IMRPhenomXP:
 	case IMRPhenomXPHM:
-    case IMRPhenomZPHM:
+ /*   case IMRPhenomZPHM:  */
     case SpinTaylorT5Fourier:
     case SpinTaylorT4Fourier:
     case SpinDominatedWf:
@@ -6896,7 +6905,7 @@ int XLALSimInspiralGetSpinFreqFromApproximant(Approximant approx){
     case IMRPhenomPv2_NRTidalv2:
 	case IMRPhenomXP:
 	case IMRPhenomXPHM:
-    case IMRPhenomZPHM:
+ /*   case IMRPhenomZPHM: */
     case SpinTaylorT5Fourier:
     case SpinTaylorT4Fourier:
     case SpinDominatedWf:
@@ -7068,7 +7077,7 @@ int XLALSimInspiralApproximantAcceptTestGRParams(Approximant approx){
     case IMRPhenomXHM:
 	case IMRPhenomXP:
 	case IMRPhenomXPHM:
-    case IMRPhenomZPHM:
+/*    case IMRPhenomZPHM: */
     case IMRPhenomT:
     case IMRPhenomTHM:
     case IMRPhenomTP:
